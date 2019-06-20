@@ -21,47 +21,47 @@
                 "data": "Mon Jun 17 2019 19:31:12",
                 "curtidas": 25,
                 "comentarios": [{ "nome": "jonatan", "texto": "uau muy topen" },
-                { "nome": "joao", "texto": "calaboca seboso" }]
+                { "nome": "joao", "texto": "Comentario construtivo" }]
             },
             {
                 "id": 2,
-                "titulo": "segundo Graham",
-                "texto": "Sincere@april.biz",
+                "titulo": "Guia Definitivo Como Criar um Blog Incrível e Ganhar Dinheiro Com Ele",
+                "texto": `Blogs, blogs e mais blogs!                  Eu amo blogs e trabalho com eles desde 2007.                                  Mas como você pode criar um blog?                                  Eu vou ajudar!                                  Você vai ler agora um tutorial completo sobre como criar um blog passo a passo.                                  É para aprender como criar um hoje mesmo!                                  Olha aqui um índice com tudo que você vai aprender a partir de agora:`,
                 "imagem": "static_res/img/top.jpg",
                 "data": "Mon Jun 17 2019 19:31:16",
                 "curtidas": 25,
                 "comentarios": [{ "nome": "jonatan", "texto": "uau muy topen" },
-                { "nome": "joao", "texto": "calaboca seboso" }]
+                { "nome": "joao", "texto": "Comentario construtivo" }]
             },
             {
                 "id": 3,
-                "titulo": "terceiro Graham",
-                "texto": "o34u12io",
+               "titulo": "Guia Definitivo Como Criar um Blog Incrível e Ganhar Dinheiro Com Ele",
+                "texto": `Blogs, blogs e mais blogs!                  Eu amo blogs e trabalho com eles desde 2007.                                  Mas como você pode criar um blog?                                  Eu vou ajudar!                                  Você vai ler agora um tutorial completo sobre como criar um blog passo a passo.                                  É para aprender como criar um hoje mesmo!                                  Olha aqui um índice com tudo que você vai aprender a partir de agora:`,
                 "imagem": "static_res/img/top.jpg",
                 "data": "Mon Jun 17 2019 19:31:17",
                 "curtidas": 25,
                 "comentarios": [{ "nome": "jonatan", "texto": "uau muy topen" },
-                { "nome": "joao", "texto": "calaboca seboso" }]
+                { "nome": "joao", "texto": "Comentario construtivo" }]
             },
             {
                 "id": 4,
-                "titulo": "terceiro Graham",
-                "texto": "o34u12io",
+               "titulo": "Guia Definitivo Como Criar um Blog Incrível e Ganhar Dinheiro Com Ele",
+                "texto": `Blogs, blogs e mais blogs!                  Eu amo blogs e trabalho com eles desde 2007.                                  Mas como você pode criar um blog?                                  Eu vou ajudar!                                  Você vai ler agora um tutorial completo sobre como criar um blog passo a passo.                                  É para aprender como criar um hoje mesmo!                                  Olha aqui um índice com tudo que você vai aprender a partir de agora:`,
                 "imagem": "static_res/img/top.jpg",
                 "data": "Mon Jun 17 2019 19:31:10",
                 "curtidas": 25,
                 "comentarios": [{ "nome": "jonatan", "texto": "uau muy topen" },
-                { "nome": "joao", "texto": "calaboca seboso" }]
+                { "nome": "joao", "texto": "Comentario construtivo" }]
             },
             {
                 "id": 5,
-                "titulo": "terceiro Graham",
-                "texto": "o34u12io",
+               "titulo": "Guia Definitivo Como Criar um Blog Incrível e Ganhar Dinheiro Com Ele",
+                "texto": `Blogs, blogs e mais blogs!                  Eu amo blogs e trabalho com eles desde 2007.                                  Mas como você pode criar um blog?                                  Eu vou ajudar!                                  Você vai ler agora um tutorial completo sobre como criar um blog passo a passo.                                  É para aprender como criar um hoje mesmo!                                  Olha aqui um índice com tudo que você vai aprender a partir de agora:`,
                 "imagem": "static_res/img/top.jpg",
                 "data": "Mon Jun 17 2019 19:31:9",
                 "curtidas": 25,
                 "comentarios": [{ "nome": "jonatan", "texto": "uau muy topen" },
-                { "nome": "joao", "texto": "calaboca seboso" }]
+                { "nome": "joao", "texto": "Comentario construtivo" }]
             },
 
         ]
@@ -154,8 +154,12 @@ function enviarComment(el) {
     let Titulo = el.target.parentElement.getElementsByTagName("input")[0];
     let Texto = el.target.parentElement.getElementsByTagName("input")[1];
     if (Titulo.value && Texto.value) {
-        let id = el.target.parentElement.parentElement.id - 1;
-        db.posts[id].comentarios.push({ "nome": Titulo.value, "texto": Texto.value });
+        let id = el.target.parentElement.parentElement.id ;
+        let item = db.posts.filter(function (el) {
+            return el.id == id
+          });
+          
+        item[0].comentarios.push({ "nome": Titulo.value, "texto": Texto.value });
 
         localStorage.setItem('dbPedroHenriqueFerreira&MichelliCristina', JSON.stringify(db));
     }
@@ -174,9 +178,6 @@ function updateContato(id, contato) {
 
     // Atualiza os dados no Local Storage
     localStorage.setItem('dbPedroHenriqueFerreira&MichelliCristina', JSON.stringify(db));
-}
-function enviarComentario(dados) {
-
 }
 function sortByDate() {
     let items = new Array();
