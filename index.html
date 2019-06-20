@@ -43,7 +43,7 @@
 
 <script>
   alert("O GitHub esta no Console! XD");
-  console.log("https://github.com/adsvunu/BlogDiw");
+  console.log("-----------------------------------------------------\nFeito Por Pedro Henrique Ferreira & Michelli Cristina \n-----------------------------------------------------\nLink GitHub: \nhttps://github.com/adsvunu/BlogDiw");
   var lastId = 0;
   function genId() {
     return lastId + 1;
@@ -52,7 +52,7 @@
   db.posts.sort(function(a, b){
         var data1 = new Date(a.data) ;
         var data2 = new Date(b.data);
-        return data1 - data2;
+        return data2 - data1;
     });
   for (var i = 0; i < databaseSorted.length; i++) {
 
