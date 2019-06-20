@@ -4,6 +4,7 @@
   "description": "Diw Project",
   "main": "init.js",
   "scripts": {
+    "deploy":"git push | git push heroku master",
     "start": "node init.js"
   },
   "author": "ayaz",
