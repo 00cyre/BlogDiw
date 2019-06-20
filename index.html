@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>newnews</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='static_res/main.css'>
+
+  <script src='static_res/db.js'></script>
+</head>
+
+<body>
+  <nav class="header_main">
+    <ul id="nav_main_ul">
+      <li class="nav_li" id="home_li"><button class="btn_home" href="index.html">newnews</button>
+      <li class="nav_li"><button class="btn_feed" href="/news_pages/feed.html">feed</button>
+      <li class="nav_li"><button class="btn_reco" href="/news_pages/Recomendado.html">recomendado</button>
+      <li class="nav_li" id="li_login"><button class="btn_log" href="/news_pages/Account.html">Log-in</button>
+
+    </ul>
+  </nav>
+  <div class="main_container">
+    <div class="content">
+
+      Titulo<br>
+      <input type="text" id="tituloSubmit">
+      <br>
+      Texto<br>
+      <input type="text" id="textoSubmit">
+      <br>
+
+      <input type="file" id="imageSubmit" accept="image/*">
+      <br><br>
+      <button onclick="enviarPost()"> Enviar
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+  var lastId = 0;
+  function genId() {
+    return lastId + 1;
+  }
+  var databaseSorted = 
+  db.posts.sort(function(a, b){
+        var data1 = new Date(a.data) ;
+        var data2 = new Date(b.data);
+        return data1 - data2;
+    });
+  for (var i = 0; i < databaseSorted.length; i++) {
+
+    //como cada linha tem 4 colunas esse calculo divide todos os elementos por 4 e o resultado é arredondado pra baixo assim cada vez que o numero
+    //for diferente eu adiciono uma nova linha
+    //if (lastmod != Math.floor((i + 1) / 4).toFixed(0) && Math.floor((i + 1) / 4).toFixed(0) != Math.floor(json.articles.length / 4).toFixed(0)) {
+    let comments = new Array();
+    databaseSorted[i].comentarios.forEach(element => {
+      comments.push(` <span class="txt_titlecont" style="color:#ffffff;font-size:24pt">${element.nome}</span>
+                      <span class="txt_titlecont" style="color:#ffffff;font-size:20pt">${element.texto}</span>`);
+    });
+
+    document.getElementsByClassName("content")[0].innerHTML += `
+          <ul class="rows" id="${databaseSorted[i].id}">
+                      <div class="new_block"  
+                      style="background:url(${databaseSorted[i].imagem});">
+                        <h1 class="txt_titlenews" style="color:#ffffff;font-size:64pt">${databaseSorted[i].titulo}</h1>
+                        <span class="txt_titlecont" style="color:#ffffff;font-size:24pt">${databaseSorted[i].texto}</span>
+                        <h3> DATA: ${databaseSorted[i].data}</h3>
+                        <span class="txt_titlecont" style="color:#ffffff;font-size:24pt;float:left;">Curtidas: ${databaseSorted[i].curtidas}</span><br>
+                        <span class="txt_titlecont" style="color:#ffffff;font-size:24pt;">Comentarios:</span>
+
+                        ` + comments.toString() + `
+                        
+                      </div>
+                        <div>
+                        Nome<br>
+                        <input type="text" class="nomeSubmit" >
+                        <br>
+                        Texto<br>
+                        <input type="text" class="textoSubmit">
+                        <br><br>
+                        <button class="enviarComment">Enviar</button>
+                        </div>
+                      <button class="curtir">Curtir</button>
+          </ul>
+          `;
+
+
+  }
+  var enviarButtons = document.getElementsByClassName("enviarComment");
+  for (y = 0; y < enviarButtons.length; y++) {
+    enviarButtons[y].addEventListener("click", (ele) => {
+      enviarComment(ele);
+    });
+  }
+  var curtirButtons = document.getElementsByClassName("curtir");
+  for (j = 0; j < curtirButtons.length; j++) {
+    curtirButtons[j].addEventListener("click", function (ele) {
+      addCurtida(ele.target.parentElement.id);
+    });
+  }
+
+
+
+
+
+</script>
+
+</html>

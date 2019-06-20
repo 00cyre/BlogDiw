@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>newnews</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../static_res/main.css'>
+    <script src='static_res/main.js'></script>
+    
+</head>
+<script>
+var urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('not'))
+{
+  const Http = new XMLHttpRequest();
+  const url = `https://newsapi.org/v2/everything?q=${urlParams.get('not')}&apiKey=0d16a9b03e08426086ce81bb13c2fde4`;
+  Http.open("GET", url);
+  Http.send();
+  Http.onreadystatechange = (e) => {
+    
+    var json = JSON.parse(Http.responseText);
+    document.getElementsByClassName("main_container")[0].innerHTML += `
+    <div class="content">
+          <h1 id="news_title">${json.articles[0].title}</h1>
+          <span id="news_content">${json.articles[0].content}
+          </span>
+        </div>`;
+  };
+
+}
+</script>
+<body>
+    <nav class="header_main">
+        <ul id="nav_main_ul">
+          <li class="nav_li" id="home_li"><button class="btn_home" onclick="window.location.href = 'https://diw-pedrohenrique2019.herokuapp.com/';">newnews</button>
+          <li class="nav_li"><button class="btn_feed" >feed</button>
+          <li class="nav_li"><button class="btn_reco" >recomendado</button>
+          <li class="nav_li" id="li_login"><button class="btn_log">Log-in</button>
+
+        </ul>
+      </nav>
+      <div class="main_container">
+        
+
+      </div>
+
+</body>
+</html>
